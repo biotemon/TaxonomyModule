@@ -300,7 +300,7 @@ colnames(simple_relative_matrix_3)[colnames(simple_relative_matrix_3) == "V1"] <
 #Making the dataframe from wide to log format
 
 ##############################################################################################################
-##############################################################################################################
+################################SECTION UPDATED ON MAR/19/2022################################################
 ##############################################################################################################
 simple_absolute_melt <- melt(simple_absolute_matrix_3, df = c("sample_names"))
 simple_relative_melt <- melt(simple_relative_matrix_3, df = c("sample_names"))
