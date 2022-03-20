@@ -333,7 +333,7 @@ simple_relative_melt$sample_names = factor(simple_relative_melt$sample_names,lev
 
 the_W_r = SETWIDTH
 the_H_r = SETHEIGHT
-the_W_a = the_W_r - 1 + ((SETCOLUMNS - 1) * 5)
+the_W_a = the_W_r - 1 + ((SETCOLUMNS - 1) * 10)
 the_H_a = the_H_r + 2
 
 pdf("taxonomy_abs_cutoff_SETTHRESHOLDHERE.pdf", width=the_W_a, height=the_H_a)
