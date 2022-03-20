@@ -331,7 +331,7 @@ simple_color_vec <- c(simple_color_vecA,simple_color_vecB,simple_color_vecC)
 simple_absolute_melt$sample_names = factor(simple_absolute_melt$sample_names,levels = desired_order)
 simple_relative_melt$sample_names = factor(simple_relative_melt$sample_names,levels = desired_order)
 
-the_W_r = SETWIDTH
+the_W_r = SETWIDTH + ((SETCOLUMNS - 1) * 10)
 the_H_r = SETHEIGHT
 the_W_a = the_W_r - 1 + ((SETCOLUMNS - 1) * 10)
 the_H_a = the_H_r + 2
