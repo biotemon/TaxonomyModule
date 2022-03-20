@@ -308,26 +308,6 @@ simple_relative_melt <- melt(simple_relative_matrix_3, df = c("sample_names"))
 ##############################################################################################################
 ##############################################################################################################
 
-for(i in 1:length(old_terms_vec)){
-  old_term <- old_terms_vec[i]
-  term_to_change <- new_terms_vec[i]
-  change_val = which(simple_absolute_melt[,2] == old_term)
-  #print(paste(old_term,term_to_change,  change_val ))
-  
-  my_levels <- levels(simple_absolute_melt[,2])
-  my_levels[length(my_levels) + 1] <- term_to_change
-  my_levels <- unique(my_levels)
-  simple_absolute_melt[, 2] <- factor(simple_absolute_melt[, 2], levels = my_levels)
-  simple_relative_melt[, 2] <- factor(simple_relative_melt[, 2], levels = my_levels)
-  simple_absolute_melt[change_val, 2] <- term_to_change
-  simple_relative_melt[change_val, 2] <- term_to_change
-  my_levels[which(my_levels == old_term)] <- term_to_change
-  my_levels <- unique(my_levels)
-  simple_absolute_melt[, 2] <- factor(simple_absolute_melt[, 2], levels = my_levels)
-  simple_relative_melt[, 2] <- factor(simple_relative_melt[, 2], levels = my_levels)
-}
-
-
 #DEFAULT COLOR SETTINGS
 xval =  dim(simple_relative_matrix_3)[2] - 1
 xvalA = ceiling(xval/3)
