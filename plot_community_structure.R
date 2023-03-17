@@ -1,6 +1,6 @@
 #Plot_community 
 #a script to plot stacked bar plots representing community analysis
-#Version Mar 19 2022
+#Version Mar 17 2023
 
 rm(list=ls()) 
 graphics.off() 
