@@ -15,20 +15,20 @@ library(reshape2)
 library(reshape)
 
 #Threshold of lowest percentage to show as an individual taxonomy
-TH = 2
+TH = SETTHRESHOLDHERE
 
 #Set working directory
-setwd("/Volumes/Red_4TB/DR_NEGI/03_taxonomy_from_galaxy")
+setwd("SETWORKINGDIRHERE")
 
 #load data
-taxonomyXcounts <- read.csv("03_mgrast_taxonomyXcounts.txt", sep=',')
+taxonomyXcounts <- read.csv("SETTAXCOUNTSFILEHERE", sep=',')
 
 #Remove unknown terms
 taxonomyXcounts<-taxonomyXcounts[!(taxonomyXcounts$SUPERKINGDOM=="unknown"),]
 
-desired_order = c("LW1", "LW2", "SC1", "SC2")
-sample_names = c("LW1", "LW2", "SC1", "SC2")
-samples <- c("1","2","3","4")
+desired_order = c("SETDESIREDBARORDERHERE")
+sample_names = c("SETSAMPLENAMESHERE")
+samples <- c("SETSAMPLENUMBERSHERE")
 
 #Definition of my_level
 #my_level ==> Superkingdom level 1
@@ -325,65 +325,33 @@ simple_color_vec <- c(simple_color_vecA,simple_color_vecB,simple_color_vecC)
 simple_color_vec <- c(simple_color_vecA,simple_color_vecB,simple_color_vecC)
 
 #MANUAL COLOR SETTINGS
-simple_color_vec[1] <- "#000000"  #.  .  . 
-simple_color_vec[2] <- "#7a7a7a"
-simple_color_vec[3] <- "#d1d1d1"
-simple_color_vec[4] <- "#512888"
-simple_color_vec[5] <- "#cc12c0"
-simple_color_vec[6] <- "#ff9e9e"
-simple_color_vec[7] <- "#D8BFD8"
-simple_color_vec[8] <- "#9E0142"
-simple_color_vec[9] <- "#fcb603"
-simple_color_vec[10] <- "#DC143C"
-simple_color_vec[11] <- "#FFEF00" # FFD700
-simple_color_vec[12] <- "#D2691E" 
-simple_color_vec[13] <- "#008000"
-simple_color_vec[14] <- "#8db500"
-simple_color_vec[15] <- "#ACE1AF"
-simple_color_vec[16] <- "#e6ffe6"
-simple_color_vec[17] <- "#4B6F44" #72996c
-simple_color_vec[18] <- "#DFFF00" #A8E224
-simple_color_vec[19] <- "#008080"
-simple_color_vec[20] <- "#a3cece"
-simple_color_vec[21] <- "#118200"
-simple_color_vec[22] <- "#CAD32E"
-simple_color_vec[23] <- "#03fcf4" #
-simple_color_vec[24] <- "#0087BD" #f8fcde
-simple_color_vec[25] <- "#0000FF"
-simple_color_vec[26] <- "#b3d7ff"
-simple_color_vec[27] <- "#000000"
-simple_color_vec[28] <- "#7a7a7a"
-simple_color_vec[29] <- "#e1e3e8"
-simple_color_vec[30] <- "#6CB4EE"
-simple_color_vec[31] <- "#4f7570"
-simple_color_vec[32] <- "#9afcef"
+SETCOLORSHERE
 
 #Sorting bars (x-axis wise) by sorting the levels of the "Treatment" column
 simple_absolute_melt$sample_names = factor(simple_absolute_melt$sample_names,levels = desired_order)
 simple_relative_melt$sample_names = factor(simple_relative_melt$sample_names,levels = desired_order)
 
-the_W_r = 1 + ((4 - 1) * 10)/6
-the_H_r = 6
-#the_W_a = the_W_r - 1 + ((4 - 1) * 10)/10
-the_W_a = 6
+the_W_r = SETWIDTH + ((SETBARS - 1) * 10)
+the_H_r = SETHEIGHT
+the_W_a = the_W_r - 1 + ((SETBARS - 1) * 10)
 the_H_a = the_H_r + 2
 bit_a = 3 * the_H_a / ( 2 * xval)
 bit_r = 3 * the_H_r / ( 2 * xval)
 
-pdf("taxonomy_abs_cutoff_4.pdf", width=the_W_a, height=the_H_a)
-ggplot(data = simple_absolute_melt, aes(x = sample_names, y = value, fill = variable)) + geom_bar(colour="black", stat = "identity", size = 0.25) + theme_classic() + theme(axis.text.x = element_text(color="black", angle = 90, hjust = 1),axis.text.y = element_text(color="black"), legend.key.height= unit(bit_a, 'cm')) + scale_fill_manual(values = simple_color_vec) + scale_y_continuous(name="Read Counts", labels = scales::comma, expand = c(0, 0)) + guides(fill=guide_legend(ncol=1)) + xlab("Treatments") + theme(text = element_text(size = 10)) 
+pdf("taxonomy_abs_cutoff_SETTHRESHOLDHERE.pdf", width=the_W_a, height=the_H_a)
+ggplot(data = simple_absolute_melt, aes(x = sample_names, y = value, fill = variable)) + geom_bar(colour="black", stat = "identity", size = 0.25) + theme_classic() + theme(axis.text.x = element_text(color="black", angle = 90, hjust = 1),axis.text.y = element_text(color="black"), legend.key.height= unit(bit_a, 'cm')) + scale_fill_manual(values = simple_color_vec) + scale_y_continuous(name="Read Counts", labels = scales::comma, expand = c(0, 0)) + guides(fill=guide_legend(ncol=SETCOLUMNS)) + xlab("Treatments") + theme(text = element_text(size = SETFONTSIZE)) 
 dev.off()
 
-pdf("taxonomy_rel_cutoff_4.pdf", width=the_W_r, height=the_H_r)
-ggplot(data = simple_relative_melt, aes(x = sample_names, y = value, fill = variable)) + geom_bar(colour="black", stat = "identity", size = 0.25) + theme_classic() + theme(axis.text.x = element_text(color="black", angle = 90, hjust = 1),axis.text.y = element_text(color="black"), legend.key.height= unit(bit_r, 'cm')) +  scale_colour_manual("black") + scale_fill_manual(values = simple_color_vec) + scale_y_continuous(name="Proportion of Read Counts", labels = scales::comma, expand = c(0, 0)) + guides(fill=guide_legend(ncol=1)) + xlab("Treatments") + theme(text = element_text(size = 10)) 
+pdf("taxonomy_rel_cutoff_SETTHRESHOLDHERE.pdf", width=the_W_r, height=the_H_r)
+ggplot(data = simple_relative_melt, aes(x = sample_names, y = value, fill = variable)) + geom_bar(colour="black", stat = "identity", size = 0.25) + theme_classic() + theme(axis.text.x = element_text(color="black", angle = 90, hjust = 1),axis.text.y = element_text(color="black"), legend.key.height= unit(bit_r, 'cm')) + scale_colour_manual("black") + scale_fill_manual(values = simple_color_vec) + scale_y_continuous(name="Proportion of Read Counts", labels = scales::comma, expand = c(0, 0)) + guides(fill=guide_legend(ncol=SETCOLUMNS)) + xlab("Treatments") + theme(text = element_text(size = SETFONTSIZE)) 
 dev.off()
 
-svg("taxonomy_abs_cutoff_4.svg", width=the_W_a, height=the_H_a)
-ggplot(data = simple_absolute_melt, aes(x = sample_names, y = value, fill = variable)) + geom_bar(colour="black", stat = "identity", size = 0.25) + theme_classic() + theme(axis.text.x = element_text(color="black", angle = 90, hjust = 1),axis.text.y = element_text(color="black"), legend.key.height= unit(bit_a, 'cm')) + scale_fill_manual(values = simple_color_vec) + scale_y_continuous(name="Read Counts", labels = scales::comma, expand = c(0, 0)) + guides(fill=guide_legend(ncol=1)) + xlab("Treatments") + theme(text = element_text(size = 10)) 
+svg("taxonomy_abs_cutoff_SETTHRESHOLDHERE.svg", width=the_W_a, height=the_H_a)
+ggplot(data = simple_absolute_melt, aes(x = sample_names, y = value, fill = variable)) + geom_bar(colour="black", stat = "identity", size = 0.25) + theme_classic() + theme(axis.text.x = element_text(color="black", angle = 90, hjust = 1),axis.text.y = element_text(color="black"), legend.key.height= unit(bit_a, 'cm')) + scale_fill_manual(values = simple_color_vec) + scale_y_continuous(name="Read Counts", labels = scales::comma, expand = c(0, 0)) + guides(fill=guide_legend(ncol=SETCOLUMNS)) + xlab("Treatments") + theme(text = element_text(size = SETFONTSIZE)) 
 dev.off()
 
-svg("taxonomy_rel_cutoff_4.svg", width=the_W_r, height=the_H_r)
-ggplot(data = simple_relative_melt, aes(x = sample_names, y = value, fill = variable)) + geom_bar(colour="black", stat = "identity", size = 0.25) + theme_classic() + theme(axis.text.x = element_text(color="black", angle = 90, hjust = 1),axis.text.y = element_text(color="black"), legend.key.height= unit(bit_r, 'cm')) +  scale_colour_manual("black") + scale_fill_manual(values = simple_color_vec) + scale_y_continuous(name="Proportion of Read Counts", labels = scales::comma, expand = c(0, 0)) + guides(fill=guide_legend(ncol=1)) + xlab("Treatments") + theme(text = element_text(size = 10)) 
+svg("taxonomy_rel_cutoff_SETTHRESHOLDHERE.svg", width=the_W_r, height=the_H_r)
+ggplot(data = simple_relative_melt, aes(x = sample_names, y = value, fill = variable)) + geom_bar(colour="black", stat = "identity", size = 0.25) + theme_classic() + theme(axis.text.x = element_text(color="black", angle = 90, hjust = 1),axis.text.y = element_text(color="black"), legend.key.height= unit(bit_r, 'cm')) + scale_colour_manual("black") + scale_fill_manual(values = simple_color_vec) + scale_y_continuous(name="Proportion of Read Counts", labels = scales::comma, expand = c(0, 0)) + guides(fill=guide_legend(ncol=SETCOLUMNS)) + xlab("Treatments") + theme(text = element_text(size = SETFONTSIZE)) 
 dev.off()
 
 #Write a csv file with the actual numbers shown in the simplified plots.
